@@ -1,0 +1,33 @@
+<app-loading #loading></app-loading>
+<div *ngIf="!load && !error">
+  <div class="form-group form-content" *ngIf="!!flowSteps && flowSteps.length > 0">
+      <div class="form-group">
+        <label>* Nombre</label>
+        <input type="text" class="form-control form-content" placeholder="Ingrese una nombre" [(ngModel)]="name" >
+      </div>
+      <div class="form-group" *ngIf="!!mainZone">
+        <label>* Capacidad</label>
+        <input type="number" min="1" max="maxCap" class="form-control form-content" placeholder="Ingrese una capacidad" [(ngModel)]="capacity" >
+      </div>
+      <div class="form-group">
+        <label>* Tipo</label>
+        <select class="form-control form-content" [(ngModel)]="flowStep" >
+          <option *ngFor="let step of flowSteps" [value]="step.Name">{{step.Name}}</option>
+        </select>
+      </div>
+      <div class="alert alert-danger form-content" *ngIf="error">
+        <strong>Error!</strong> No se pudo crear la inspección, por favor contáctese con un administrador.
+      </div>
+      <div class="alert alert-danger form-content" *ngIf="maxCap <= 0 || capacity > maxCap">
+        <strong>Atencion!</strong> No se puede crear una subzona con esa capacidad, la capacidad maxima permitida es de {{maxCap}}.
+      </div>
+      <button type="submit" class="btn btn-info" (click)="createSubZone()" [ngClass]="{'disabled' : !isValidData()}" [disabled]="!isValidData()">Crear</button><br>
+  </div>
+</div>
+
+<div *ngIf="error">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+  </div>
+</div>
+<app-loading-modal #loadingModal></app-loading-modal>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0488A1C-0CD3-4125-87F2-2DF3D37B6335}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VehicleTracking.Repository</RootNamespace>
+    <AssemblyName>VehicleTracking.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base64ImageDAO.cs" />
+    <Compile Include="Base64ImageDAOImp.cs" />
+    <Compile Include="BatchDAO.cs" />
+    <Compile Include="BatchDAOImp.cs" />
+    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="Exceptions\IncorrectUserRoleException.cs" />
+    <Compile Include="FlowDAO.cs" />
+    <Compile Include="FlowDAOImp.cs" />
+    <Compile Include="HistoryDAO.cs" />
+    <Compile Include="HistoryDAOImp.cs" />
+    <Compile Include="InspectionDAO.cs" />
+    <Compile Include="InspectionDAOImp.cs" />
+    <Compile Include="Mappers\Base64ImageMapper.cs" />
+    <Compile Include="Mappers\BatchMapper.cs" />
+    <Compile Include="Mappers\DamageMapper.cs" />
+    <Compile Include="Mappers\InspectionMapper.cs" />
+    <Compile Include="Mappers\TransportMapper.cs" />
+    <Compile Include="Mappers\UserMapper.cs" />
+    <Compile Include="Mappers\Mapper.cs" />
+    <Compile Include="Mappers\VehicleMapper.cs" />
+    <Compile Include="Mappers\ZoneMapper.cs" />
+    <Compile Include="RoleDAOImp.cs" />
+    <Compile Include="RoleDAO.cs" />
+    <Compile Include="TransportDAO.cs" />
+    <Compile Include="TransportDAOImp.cs" />
+    <Compile Include="UserDAO.cs" />
+    <Compile Include="UserDAOImp.cs" />
+    <Compile Include="VehicleDAO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VehicleDAOImpl.cs" />
+    <Compile Include="ZoneDAO.cs" />
+    <Compile Include="ZoneDAOImp.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VehicleTracking.Data.DataAccess\VehicleTracking.Data.DataAccess.csproj">
+      <Project>{ef94bd63-1977-4bfb-a0ba-55f2ea2b4b8e}</Project>
+      <Name>VehicleTracking.Data.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehicleTracking.Data.Entities\VehicleTracking.Data.Entities.csproj">
+      <Project>{78de400e-7eac-4212-ad01-972110f859ad}</Project>
+      <Name>VehicleTracking.Data.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehicleTracking.DependencyResolver\VehicleTracking.DependencyResolver.csproj">
+      <Project>{10a2e0d9-5337-406f-ac69-c9c6931d4bcf}</Project>
+      <Name>VehicleTracking.DependencyResolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehicleTracking.Web.Models\VehicleTracking.Web.Models.csproj">
+      <Project>{e61b10f7-aea3-4288-a940-be425335517e}</Project>
+      <Name>VehicleTracking.Web.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,1814 @@
+{
+	"info": {
+		"name": "VehicleTraking",
+		"_postman_id": "5a6a3401-a208-c32d-4fc4-2936c5f65469",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UserName\": \"admin\",\n  \"Password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/users/login",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/users/logout",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users",
+								"logout"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Gaston\",\n\t\"LastName\": \"Donadio\",\n\t\"UserName\": \"tonga\",\n\t\"Phone\": \"094123456\",\n\t\"Password\": \"tonga\",\n\t\"Role\": \"Operario del Puerto\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/users",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Duplicated",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Emiliano\",\n\t\"LastName\": \"Rodriguez\",\n\t\"UserName\": \"emi\",\n\t\"Phone\": \"123\",\n\t\"Password\": \"emi\",\n\t\"Role\": \"Operario del Patio\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/users",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Role Error",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Emiliano\",\n\t\"LastName\": \"Rodriguez\",\n\t\"UserName\": \"Emiliano\",\n\t\"Phone\": \"123\",\n\t\"Password\": \"emi\",\n\t\"Role\": \"Operario\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/users",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Format Error",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Emiliano\"\n\t\"LastName\": \"Rodriguez\",\n\t\"UserName\": \"pepito123\",\n\t\"Phone\": \"123\",\n\t\"Password\": \"emi\",\n\t\"Role\": \"Operario del Patio\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/users",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Suzuki\",\n  \"Model\": \"Alto\",\n  \"Year\": \"2016\",\n  \"Color\": \"Gris\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Vehicle Duplicated",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Suzuki\",\n  \"Model\": \"Alto\",\n  \"Year\": \"2016\",\n  \"Color\": \"Gris\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Vehicle Format Error",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Suzuki\",\n  \"Model\": \"Alto\",\n  \"Year\": \"2016\",\n  \"Color\": \"Gris\"\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles/SSD 1003",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles",
+								"SSD 1003"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"BMW\",\n  \"Model\": \"2002\",\n  \"Year\": \"1971\",\n  \"Color\": \"Naranja\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1003\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles/SSD 1001",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles",
+								"SSD 1001"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetByVin Vehicle",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Chevrolet\",\n  \"Model\": \"Onix\",\n  \"Year\": \"2017\",\n  \"Color\": \"Gris\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\",\n  \"CurrentLocation\": \"Montevideo\",\n  \"Status\": \"Bueno\"\n  \n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles/ssd 1000",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles",
+								"ssd 1000"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetByVin Vehicle in Port",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Chevrolet\",\n  \"Model\": \"Onix\",\n  \"Year\": \"2017\",\n  \"Color\": \"Gris\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\",\n  \"CurrentLocation\": \"Montevideo\",\n  \"Status\": \"Bueno\"\n  \n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles/SSD 1007",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles",
+								"SSD 1007"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetByVin Vehicle in Transport",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Chevrolet\",\n  \"Model\": \"Onix\",\n  \"Year\": \"2017\",\n  \"Color\": \"Gris\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\",\n  \"CurrentLocation\": \"Montevideo\",\n  \"Status\": \"Bueno\"\n  \n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles/ssd 1000",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles",
+								"ssd 1000"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetByVin Vehicle in Yard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Chevrolet\",\n  \"Model\": \"Onix\",\n  \"Year\": \"2017\",\n  \"Color\": \"Gris\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\",\n  \"CurrentLocation\": \"Montevideo\",\n  \"Status\": \"Bueno\"\n  \n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles/ssd 1002",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles",
+								"ssd 1002"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetByGroup Vehicle",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Chevrolet\",\n  \"Model\": \"Onix\",\n  \"Year\": \"2017\",\n  \"Color\": \"Gris\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\",\n  \"CurrentLocation\": \"Montevideo\",\n  \"Status\": \"Bueno\"\n  \n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles/group/En puerto",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles",
+								"group",
+								"En puerto"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Chevrolet\",\n  \"Model\": \"Onix\",\n  \"Year\": \"2017\",\n  \"Color\": \"Gris\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1000\",\n  \"CurrentLocation\": \"Montevideo\",\n  \"Status\": \"Bueno\"\n  \n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetHistory Vehicle",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Brand\": \"Nsu\",\n  \"Model\": \"Prinz\",\n  \"Year\": \"1965\",\n  \"Color\": \"Naranja\",\n  \"Type\": \"Auto\",\n  \"Vin\": \"SSD 1001\",\n  \"CurrentLocation\": \"Transporte\",\n  \"Status\": \"En transito\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/vehicles/ssd 1001/history",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"vehicles",
+								"ssd 1001",
+								"history"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"description": "",
+			"item": [
+				{
+					"name": "GetAll Roles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Gaston\",\n\t\"LastName\": \"Donadio\",\n\t\"UserName\": \"tonga\",\n\t\"Phone\": \"094123456\",\n\t\"Password\": \"tonga\",\n\t\"Role\": \"Administrador\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/roles",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Batch",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Batch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\",\n\t\t\t\"SSD 1001\",\n\t\t\t\"SSD 1002\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/batches",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"batches"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create batch with veichle duplicated",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/batches",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"batches"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create batch with veichle non-existent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 2000\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/batches",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"batches"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create batch without veichle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"Description\": \"Este es el lote 1\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/batches",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"batches"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetById Batch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"CreatorUserName\": \"tonga\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\",\n\t\t\t\"SSD 1002\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/batches/b7eb9d32-c98c-4dfe-a7d2-376f5627c6e0",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"batches",
+								"b7eb9d32-c98c-4dfe-a7d2-376f5627c6e0"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll Batches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"CreatorUserName\": \"tonga\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\",\n\t\t\t\"SSD 1002\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/batches/",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"batches",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inspection",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Inspection Port",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Damages\": [\n\t\t\t{\n\t\t\t\t\"Description\": \"Daño en la puerta\",\n\t\t\t\t\"Images\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"Base64EncodedImage\": \"{{image1}}\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t}\n\t\t],\n\t\"Location\":  \"Puerto 1\",\n\t\"IdVehicle\": \"SSD 1002\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inspections",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inspections"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Inspection Yard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Damages\": [\n\t\t\t{\n\t\t\t\t\"Description\": \"Daño en la puerta\",\n\t\t\t\t\"Images\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"Base64EncodedImage\": \"{{image1}}\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t}\n\t\t],\n\t\"Location\":  \"Patio 1\",\n\t\"IdVehicle\": \"SSD 1000\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inspections",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inspections"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Inspection with vehicle non existent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Damages\": [\n\t\t\t{\n\t\t\t\t\"Description\": \"Daño en la puerta\",\n\t\t\t\t\"Images\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"Base64EncodedImage\": \"{{image1}}\"\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t}\n\t\t],\n\t\"Location\":  \"Puerto 1\",\n\t\"IdVehicle\": \"SSD 2000\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inspections",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inspections"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Inspection without damage",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Location\":  \"Puerto 1\",\n\t\"IdVehicle\": \"SSD 1000\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inspections",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inspections"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Inspection with Damage and without image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Damages\": [\n\t\t\t{\n\t\t\t\t\"Description\": \"Daño en la puerta\"\n\t\t\t}\n\t\t],\n\t\"Location\":  \"Puerto 1\",\n\t\"IdVehicle\": \"SSD 1000\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inspections",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inspections"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetById Inspection",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"CreatorUserName\": \"tonga\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\",\n\t\t\t\"SSD 1002\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inspections/e93118a4-04df-4ad8-b95d-23f08165baa8",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inspections",
+								"e93118a4-04df-4ad8-b95d-23f08165baa8"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetById Inspection FormatError",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"CreatorUserName\": \"tonga\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\",\n\t\t\t\"SSD 1002\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inspections/sad",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inspections",
+								"sad"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll Inspection",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"CreatorUserName\": \"tonga\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\",\n\t\t\t\"SSD 1002\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/inspections/",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"inspections",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transport",
+			"description": "",
+			"item": [
+				{
+					"name": "Start Transport",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"e7e51874-3899-4f62-82e0-dc7f94635046\"\n]"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/transports/start",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"transports",
+								"start"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Start Transport with batch non-Existent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"D40F70C3-4A51-4A9C-894D-898AFB281185\"\n]"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/transports/start",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"transports",
+								"start"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Start Transport with batch format error",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t\"asd\"\n]"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/transports/start",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"transports",
+								"start"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Finish Transport",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"fe5e7a3f-d352-4f73-95eb-a3c28912f478\""
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/transports/finish",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"transports",
+								"finish"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Finish Transport non-Existent",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"6E527EE3-6BA8-4C4F-A463-C4B9A757A295\"\n\t\n"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/transports/finish",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"transports",
+								"finish"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetById Transport",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"CreatorUserName\": \"tonga\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\",\n\t\t\t\"SSD 1002\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/transports/6E527EE3-6BA8-4C4F-A463-C4B9A757A29E",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"transports",
+								"6E527EE3-6BA8-4C4F-A463-C4B9A757A29E"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetByAll Transport",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Lote1\",\n\t\"CreatorUserName\": \"tonga\",\n\t\"Description\": \"Este es el lote 1\",\n\t\"Vehicles\": [\n\t\t\t\"SSD 1000\",\n\t\t\t\"SSD 1002\"\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/transports/",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"transports",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zone",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Zone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Zona1\",\n\t\"MaxCapacity\": \"2\",\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create SubZone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Taller\",\n\t\"MaxCapacity\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Assign vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones/vehicle/assign/?zoneId=deebd741-6cd3-4a4c-baa9-6c01131759dc&vin=SSD 1001",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones",
+								"vehicle",
+								"assign",
+								""
+							],
+							"query": [
+								{
+									"key": "zoneId",
+									"value": "deebd741-6cd3-4a4c-baa9-6c01131759dc",
+									"equals": true
+								},
+								{
+									"key": "vin",
+									"value": "SSD 1001",
+									"equals": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Assign SubZone",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones/subzone/assign/?subZoneId=deebd741-6cd3-4a4c-baa9-6c01131759dc&&zoneId=c342526f-d646-4d05-b73e-e8149d37d5f1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones",
+								"subzone",
+								"assign",
+								""
+							],
+							"query": [
+								{
+									"key": "subZoneId",
+									"value": "deebd741-6cd3-4a4c-baa9-6c01131759dc",
+									"equals": true
+								},
+								{
+									"key": "zoneId",
+									"value": "c342526f-d646-4d05-b73e-e8149d37d5f1",
+									"equals": true
+								},
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Assign SubZone Capacity Error",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones/subzone/assign/?subZoneId=5B3B50CB-300B-440F-8068-2CEAA6A2E2B8&&zoneId=5F76E26C-61BF-4A4A-BCED-E3D4C2ABF776",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones",
+								"subzone",
+								"assign",
+								""
+							],
+							"query": [
+								{
+									"key": "subZoneId",
+									"value": "5B3B50CB-300B-440F-8068-2CEAA6A2E2B8",
+									"equals": true
+								},
+								{
+									"key": "zoneId",
+									"value": "5F76E26C-61BF-4A4A-BCED-E3D4C2ABF776",
+									"equals": true
+								},
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Assign vehicle Capacity Error",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones/vehicle/assign/?zoneId=1066F31C-C534-49F3-99DA-D0790B5AFF6B&&vin=SSD 1001",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones",
+								"vehicle",
+								"assign",
+								""
+							],
+							"query": [
+								{
+									"key": "zoneId",
+									"value": "1066F31C-C534-49F3-99DA-D0790B5AFF6B",
+									"equals": true
+								},
+								{
+									"key": "vin",
+									"value": "SSD 1001",
+									"equals": true
+								},
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Zona1\",\n\t\"MaxCapacity\": \"5\",\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones/vehicle/SSD 1000",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones",
+								"vehicle",
+								"SSD 1000"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll Zones",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Zona1\",\n\t\"MaxCapacity\": \"5\",\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones/",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones",
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GetById Zones",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "UserToken",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Name\": \"Zona1\",\n\t\"MaxCapacity\": \"5\",\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/zones/3c1c37a4-d4af-40b4-9cae-0fcf19403528",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"zones",
+								"3c1c37a4-d4af-40b4-9cae-0fcf19403528"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

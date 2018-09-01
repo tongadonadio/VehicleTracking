@@ -1,0 +1,38 @@
+<app-loading #loading></app-loading>
+<div *ngIf="!load && !error">
+  <div class="form-group form-content">
+    <div class="form-group">
+      <label>* Nombre</label>
+      <input type="text" class="form-control form-content" placeholder="Ingrese una nombre" [(ngModel)]="name" >
+    </div>
+    <div class="form-group">
+      <label>* Descripción</label>
+      <input type="text" class="form-control form-content" placeholder="Ingrese una descripción" [(ngModel)]="description" >
+    </div>
+  </div>
+  <div class="form-content">
+    <label><strong>Vehículos: </strong>
+      <span *ngIf="this.vehicles.length <= 0">No hay vehiculos para transportar, no se puede crear lote.</span>
+    </label><br>
+    <table class="table content-table historic-table" *ngIf="this.vehicles.length > 0">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col">Vehículo</th>
+        <th scope="col" style="text-align: center">Seleccionar</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of vehicles">
+        <td>{{vehicle.Vin}}</td>
+        <td style="text-align: center"><label class="form-check-label"><input type="checkbox" class="form-check-input chk-table" [(ngModel)]="vehicle.Selected"></label></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="submit" class="btn btn-info" (click)="createBatch()" [ngClass]="{'disabled' : !isValidData()}" [disabled]="!isValidData()">Crear</button><br>
+</div>
+<div *ngIf="error">
+  <br><div class="alert alert-danger form-content">
+  <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+</div>
+</div>

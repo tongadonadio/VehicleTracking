@@ -1,0 +1,20 @@
+<div class="form-group form-content">
+  <label>* Nombre de usuario</label>
+  <input type="text" class="form-control form-content" placeholder="Ingrese el nombre de usuario" [(ngModel)]="username" >
+</div>
+<div class="form-group form-content">
+  <label>* Password</label>
+  <input type="password" class="form-control form-content" placeholder="Password" [(ngModel)]="password" >
+</div>
+<div class="alert alert-danger form-content" *ngIf="error">
+  <strong>Error!</strong> El nombre de usuario o contraseña no son correctos
+</div>
+<div class="alert alert-danger form-content" *ngIf="errorServer">
+  <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+</div>
+<div>
+  <small class="form-text text-muted">Si no tiene un usuario, contactese con su administrador.</small>
+</div><br>
+<button type="submit" class="btn btn-primary" (click)="logIn()" [ngClass]="{'disabled' : !isValidData()}" [disabled]="!isValidData()">Log in</button><br>
+
+<app-loading-modal #loading></app-loading-modal>

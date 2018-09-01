@@ -1,0 +1,80 @@
+<div class="content-btn form-content action-content">
+  <input type="text" class="form-control search" placeholder="Ingrese un Vin..." [(ngModel)]="vin" >
+  <button type="button" class="btn btn-info action-btn" (click)="search()">Buscar</button>
+</div>
+
+<div class="alert alert-danger form-content historic-all" *ngIf="errorServer">
+  <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+</div>
+
+<div class="alert alert-warning form-content historic-all" *ngIf="error">
+  <strong>Atención!</strong> No existe ningún vehiculo con ese vin.
+</div>
+
+<div *ngIf="!!historic" class="historic-all">
+  <h4>Historial de Vehículo</h4>
+
+  <div class="historic-container">
+    <div class="historic-short-container">
+      <span class="card-text"><strong>Vin: </strong>{{historic.VehicleHistory[0].Vin}}</span><br>
+      <span class="card-text"><strong>Tipo: </strong>{{historic.VehicleHistory[0].Type}}</span><br>
+      <span class="card-text"><strong>Marca: </strong>{{historic.VehicleHistory[0].Brand}}</span><br>
+      <span class="card-text"><strong>Modelo: </strong>{{historic.VehicleHistory[0].Model}}</span><br>
+      <span class="card-text"><strong>Color: </strong>{{historic.VehicleHistory[0].Color}}</span><br>
+      <span class="card-text"><strong>Año: </strong>{{historic.VehicleHistory[0].Year}}</span>
+    </div>
+
+    <div class="historic-large-container">
+      <table class="table content-table historic-table">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let vehicle of historic.VehicleHistory">
+          <th>{{vehicle.Date | date:'dd/MM/y, h:mm'}}</th>
+          <td>{{vehicle.Status}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><br>
+
+  <h6 *ngIf="historic.InspectionHistory.length > 0">Inspecciones</h6>
+
+  <div class="card chart form-content" *ngFor="let inspection of historic.InspectionHistory">
+    <div class="card-header">
+      <h6>Inspección - {{inspection.Date | date:'dd/MM/y, h:mm'}}</h6>
+    </div>
+    <div class="card-body">
+      <span class="card-text"><strong>Id: </strong>{{inspection.Id}}</span><br>
+      <span class="card-text"><strong>Ubicación: </strong>{{inspection.Location}}</span><br>
+      <span class="card-text"><strong>Creador: </strong>{{inspection.CreatorUserName}}</span><br>
+      <span class="card-text"><strong>Vehículo: </strong>{{inspection.IdVehicle}}</span>
+    </div>
+    <ul class="list-group list-group-flush" *ngIf="!!inspection.Damages">
+      <li class="list-group-item">
+        <div style="margin-bottom: 10px">
+          <h6>Daños</h6>
+        </div>
+        <div *ngIf="inspection.Damages.length <=0">
+          <span>Sin daños</span>
+        </div>
+        <div *ngFor="let damage of inspection.Damages">
+          <div style="overflow: hidden">
+            <span class="card-text"><strong>Descripción: </strong>{{damage.Description}}</span><br>
+            <span class="card-text"><strong>Imagenes: </strong></span><br>
+            <div *ngFor="let image of damage.Images" class="inspection-image-container">
+              <img [src]="image.Base64EncodedImage" class="inspection-image">
+            </div>
+          </div>
+          <hr *ngIf="inspection.Damages.indexOf(damage) != inspection.Damages.length - 1">
+        </div>
+      </li>
+    </ul>
+  </div><br>
+</div>
+
+<app-loading #loading></app-loading>

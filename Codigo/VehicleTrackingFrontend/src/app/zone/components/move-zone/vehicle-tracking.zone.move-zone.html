@@ -1,0 +1,31 @@
+<app-loading #loading></app-loading>
+<div class="form-group form-content" *ngIf="!load && !error">
+  <div class="form-content">
+    <label><strong>Zonas: </strong><span *ngIf="zones.length <= 0">No hay zonas para asignar.</span></label><br>
+    <table class="table content-table historic-table" *ngIf="zones.length > 0">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col" style="text-align: center">Seleccionar</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let zone of zones">
+        <td>{{zone.Id}}</td>
+        <td>{{zone.Name}}</td>
+        <td style="text-align: center"><label class="form-check-label"><input type="checkbox" class="form-check-input chk-table" [(ngModel)]="zone.Selected" (change)="zoneSelected(zone)"></label></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="submit" class="btn btn-info" (click)="assign()" [ngClass]="{'disabled' : !isValidData()}" [disabled]="!isValidData()">Asignar</button><br>
+</div>
+
+<div *ngIf="error">
+  <br><div class="alert alert-danger form-content">
+  <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+</div>
+</div>
+
+<app-loading-modal #loadingModal></app-loading-modal>

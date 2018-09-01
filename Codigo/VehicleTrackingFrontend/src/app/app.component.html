@@ -1,0 +1,82 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+  <div class="container">
+    <a><img class="logo" src="img/logo.png"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item" *ngIf="isUserLogged">
+          <a class="nav-link js-scroll-trigger" (click)="logOut()">Log out</a>
+        </li>
+        <li class="nav-item" *ngIf="isUserLogged">
+          <div class="loggedUserCard nav-item">
+            <span>{{userLogged.fullName}}</span><br>
+            <span>{{userLogged.role}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<header class="masthead" *ngIf="!isUserLogged">
+  <div class="container">
+    <div class="intro-text">
+      <div class="intro-heading text-uppercase">Vehicle Tracking</div>
+      <div class="intro-lead-in">La aplicación que lleva a cabo una correcta trazabilidad de todos los vehiculos en la empresa.</div>
+      <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" (click)="login.init();loginModal.open()" data-toggle="modal" >Log in</a>
+    </div>
+  </div>
+</header>
+
+<div class="content" *ngIf="isUserLogged">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" *ngIf="isUserAllowedToVehicleTab()">
+      <a [ngClass]="{'active' : vehicleActive}" class="nav-link" data-toggle="tab" role="tab" (click)="displayVehicles.init();activateVehicle()">Vehículos</a>
+    </li>
+    <li class="nav-item" *ngIf="isUserAllowedToInspectionTab()">
+      <a [ngClass]="{'active' : inspectionActive}" class="nav-link" data-toggle="tab" role="tab" (click)="displayInspections.init();activateInspection()">Inspecciones</a>
+    </li>
+    <li class="nav-item" *ngIf="isUserAllowedToBatchTab()">
+      <a [ngClass]="{'active' : batchActive}" class="nav-link" data-toggle="tab" role="tab" (click)="displayBatches.init();activateBatch()">Lotes</a>
+    </li>
+    <li class="nav-item" *ngIf="isUserAllowedToTransportTab()">
+      <a [ngClass]="{'active' : transportActive}" class="nav-link" data-toggle="tab" role="tab" (click)="displayTransports.init();activateTransport()">Transportes</a>
+    </li>
+    <li class="nav-item" *ngIf="isUserAllowedToHistoryTab()">
+      <a [ngClass]="{'active' : historicActive}" class="nav-link" data-toggle="tab" role="tab" (click)="activateHistoric()">Historial</a>
+    </li>
+    <li class="nav-item" *ngIf="isUserAllowedToZoneTab()">
+      <a [ngClass]="{'active' : zoneActive}" class="nav-link" data-toggle="tab" role="tab" (click)="displayZones.init();activateZone()">Zonas</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div [ngClass]="{'active' : vehicleActive, 'show' : vehicleActive }" class="tab-pane fade" role="tabpanel" >
+      <app-display-vehicles [role]="userLogged.role" #displayVehicles></app-display-vehicles>
+    </div>
+    <div [ngClass]="{'active' : inspectionActive, 'show' : inspectionActive }" class="tab-pane fade" role="tabpanel" >
+      <app-display-inspection #displayInspections></app-display-inspection>
+    </div>
+    <div [ngClass]="{'active' : batchActive, 'show' : batchActive }" class="tab-pane fade" role="tabpanel" >
+      <app-display-batches [user]="userLogged" #displayBatches></app-display-batches>
+    </div>
+    <div [ngClass]="{'active' : historicActive, 'show' : historicActive }" class="tab-pane fade" role="tabpanel" >
+      <app-display-historic></app-display-historic>
+    </div>
+    <div [ngClass]="{'active' : transportActive, 'show' : transportActive }" class="tab-pane fade" role="tabpanel" >
+      <app-display-transports [user]="userLogged" #displayTransports></app-display-transports>
+    </div>
+    <div [ngClass]="{'active' : zoneActive, 'show' : zoneActive }" class="tab-pane fade" role="tabpanel" >
+      <app-display-zones [user]="userLogged" #displayZones></app-display-zones>
+    </div>
+  </div>
+</div>
+
+<app-vehicle-tracking-modal #loginModal [title]="'Log in'">
+  <app-vehicle-tracking-login #login (confirm)="logIn($event);loginModal.close()"></app-vehicle-tracking-login>
+</app-vehicle-tracking-modal>

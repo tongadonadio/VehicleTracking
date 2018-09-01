@@ -1,0 +1,125 @@
+<div *ngIf="!load">
+
+  <div *ngIf="createZoneError && !globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> No se pudo crear la zona, por favor contáctese con un administrador.
+  </div>
+  </div>
+
+  <div *ngIf="createSubZoneError && !globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> No se pudo crear la subzona, por favor contáctese con un administrador.
+  </div>
+  </div>
+
+  <div *ngIf="assignZoneError && !globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> No se pudo asignar la zona, por favor contáctese con un administrador.
+  </div>
+  </div>
+
+  <div *ngIf="assignVehicleError && !globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> No se pudo asignar el vehículo, por favor contáctese con un administrador.
+  </div>
+  </div>
+
+  <div *ngIf="vehicleReadyError && !globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> No se pudo poner el vehículo listo para la venta, por favor contáctese con un administrador.
+  </div>
+  </div>
+
+  <div class="content-btn form-content" *ngIf="!globalError">
+    <input type="text" class="form-control search" placeholder="Buscar por Id..." [(ngModel)]="search" >
+    <button type="button" class="btn btn-info action-btn" (click)="createZone.init();createZoneModal.open()">Crear</button>
+  </div>
+
+  <div *ngIf="globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+  </div>
+  </div>
+
+  <div class="form-group form-content" *ngIf="(!zones || zones.length <= 0) && !globalError">
+    <br><span>No hay ninguna zona creada en el sistema.</span>
+  </div>
+
+  <div *ngIf="!!zones && zones.length > 0 && (zones | searchZone:search).length <= 0">
+    <br><div class="alert alert-warning form-content">
+    <strong>Atención!</strong> No hay zonas disponibles para visualizar para esta busqueda.
+  </div>
+  </div>
+
+  <div *ngIf="!!zones && zones.length > 0 && (zones | searchZone:search).length > 0">
+    <div class="card chart form-content" *ngFor="let zone of (zones | searchZone:search)">
+      <div class="card-header">
+        <h6>Zona</h6>
+      </div>
+       <div class="card-body">
+         <span class="card-text"><strong>Id: </strong>{{zone.Id}}</span><br>
+         <span class="card-text"><strong>Nombre: </strong>{{zone.Name}}</span><br>
+         <span class="card-text"><strong>Capacidad: </strong>{{zone.MaxCapacity}}</span><br>
+      </div>
+      <ul class="list-group list-group-flush" *ngIf="!!zone.SubZones">
+        <li class="list-group-item">
+          <div style="margin-bottom: 10px">
+            <h6 style="display: inline-block">Subzonas</h6>
+            <button style="margin-left: 15px; font-size: 12px" type="button" class="btn btn-info action-btn" (click)="createSubZone.init();createSubZoneModal.open()">Crear subzona</button>
+          </div>
+          <div *ngFor="let subZone of zone.SubZones">
+            <hr>
+            <span><strong>Subzona:</strong></span><br>
+            <div>
+              <span class="card-text"><strong>Id: </strong>{{subZone.Id}}</span><br>
+              <span class="card-text"><strong>Nombre: </strong>{{subZone.Name}}</span><br>
+              <span class="card-text"><strong>Capacidad: </strong>{{subZone.MaxCapacity}}</span><br>
+              <span class="card-text" *ngIf="!!subZone.FlowStep"><strong>Tipo: </strong>{{subZone.FlowStep.Name}}</span>
+              <span class="card-text" *ngIf="!subZone.FlowStep"><strong>Tipo: </strong>Sin tipo</span><br>
+              <button type="button" class="btn btn-info zone-btn" (click)="moveSubZone.init();moveSubZoneModal.open()">Mover subzona</button>
+              <button type="button" class="btn btn-info zone-btn" (click)="assignVehiclesModal.open();assignVehicles.init()">Agregar vehículo</button>
+            </div><br>
+            <label>
+              <strong>Vehículos: </strong><span *ngIf="!subZone.Vehicles || subZone.Vehicles.length <= 0">No hay vehículos ubicados en esta subzona.</span>
+            </label><br>
+            <table class="table content-table" *ngIf="!!subZone.Vehicles && subZone.Vehicles.length > 0">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Vin</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col" style="text-align: center">Venta</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let vehicle of subZone.Vehicles">
+                <td>{{vehicle.Vin}}</td>
+                <td>{{vehicle.Type}}</td>
+                <td>{{vehicle.Brand}}</td>
+                <td>{{vehicle.Model}}</td>
+                <td style="text-align: center" *ngIf="vehicle.ReadyToSell"><button type="button" class="btn btn-info btn-table" (click)="setVehicleReady(vehicle.Vin)">Pronto para vender</button></td>
+                <td style="text-align: center" *ngIf="!vehicle.ReadyToSell">El vehículo no está preparado para ser vendido</td>
+              </tr>
+              </tbody>
+            </table>
+            <app-vehicle-tracking-modal #moveSubZoneModal [title]="'Mover Subzona'">
+              <app-move-zone #moveSubZone [subZone]="subZone" (confirm)="assign($event);moveSubZoneModal.close()"></app-move-zone>
+            </app-vehicle-tracking-modal>
+            <app-vehicle-tracking-modal #assignVehiclesModal [title]="'Agregar Vehículo'">
+              <app-assign-vehicles #assignVehicles [zone]="subZone" (confirm)="assignVehicle($event);assignVehiclesModal.close()"></app-assign-vehicles>
+            </app-vehicle-tracking-modal>
+          </div>
+        </li>
+      </ul>
+      <app-vehicle-tracking-modal #createSubZoneModal [title]="'Crear Subzona'">
+        <app-create-subzone #createSubZone [mainZone]="zone" (confirm)="createNewSubZone($event);createSubZoneModal.close()"></app-create-subzone>
+      </app-vehicle-tracking-modal>
+    </div><br>
+  </div>
+</div>
+<app-vehicle-tracking-modal #createZoneModal [title]="'Crear Zona'">
+  <app-create-zone #createZone (confirm)="createNewZone($event);createZoneModal.close()"></app-create-zone>
+</app-vehicle-tracking-modal>
+<app-loading #loading></app-loading>
+<app-loading-modal #loadingModal></app-loading-modal>

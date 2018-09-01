@@ -1,0 +1,12 @@
+<Vehicles>
+	<Vehicle>
+		<Brand>Chevrolet</Brand>
+		<Model>Onix</Model>
+		<Year>2016</Year>
+		<Color>Rojo</Color>
+		<Type>Auto</Type>
+		<Vin>SSD 1234</Vin>
+		<CurrentLocation>Patio</CurrentLocation>
+		<Status>En patio</Status>
+	</Vehicle>
+</Vehicles>

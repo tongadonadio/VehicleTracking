@@ -1,0 +1,38 @@
+<div class="form-group form-content">
+  <label><strong>Vehículo: </strong>{{vehicle.Vin}}</label><br>
+  <label><strong>Ubicación:</strong></label>
+  <select class="form-control form-content" [(ngModel)]="location" >
+    <option *ngFor="let loc of locations" [value]="loc">{{loc}}</option>
+  </select>
+</div>
+<div class="form-group form-content">
+  <button class="btn btn-info form-content" (click)="addDamage()" >Agregar daño</button><br>
+</div>
+<div *ngFor="let damage of damages" class="damage-content form-content">
+  <div>
+    <label><strong>Daño</strong></label>
+    <span class="damage-close" (click)="deleteDamage(damage)">&times;</span>
+  </div>
+  <div class="form-group">
+    <label>* Descripción</label>
+    <input type="text" class="form-control form-content" placeholder="Ingrese una descripción" [(ngModel)]="damage.Description" >
+  </div>
+  <div class="form-group" style="overflow: hidden;">
+    <label class="btn btn-info custom-file-upload form-content">
+      <input (change)="imageUploaded($event, damage)" type="file" class="form-control form-content" accept="image/x-png,image/gif,image/jpeg" />
+      Ingresar imagen
+    </label><br>
+    <label>* Imagenes: <span *ngIf="damage.UploadedImages.length <= 0">No se han ingresado imagenes aun</span></label>
+    <div *ngFor="let img of damage.UploadedImages">
+      <div class="img-close-content">
+        <span class="img-close-label">{{img.name}} </span>
+        <span class="img-close-x" (click)="deleteImage(damage, img)">&times;</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button type="submit" class="btn btn-info" (click)="createInspection()" [ngClass]="{'disabled' : !isValidData()}" [disabled]="!isValidData()">Crear</button><br>
+
+
+<app-loading-modal #loading></app-loading-modal>

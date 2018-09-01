@@ -1,0 +1,14 @@
+<div>
+    <div class="form-group">
+      <label>* Nombre</label>
+      <input type="text" class="form-control form-content" placeholder="Ingrese una nombre" [(ngModel)]="name" >
+    </div>
+    <div class="form-group">
+      <label>* Capacidad</label>
+      <input type="number" min="1" class="form-control form-content" placeholder="Ingrese una capacidad" [(ngModel)]="capacity" >
+    </div>
+  <div class="alert alert-danger form-content" *ngIf="error">
+    <strong>Error!</strong> No se pudo crear la zona, por favor contáctese con un administrador.
+  </div>
+  <button type="submit" class="btn btn-info" (click)="createZone()" [ngClass]="{'disabled' : !isValidData()}" [disabled]="!isValidData()">Crear</button><br>
+</div>

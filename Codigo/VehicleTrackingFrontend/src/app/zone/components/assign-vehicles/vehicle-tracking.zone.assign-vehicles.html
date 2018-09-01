@@ -1,0 +1,29 @@
+<app-loading #loading></app-loading>
+<div class="form-group form-content" *ngIf="!isLoading && !error">
+  <div class="form-content">
+    <label><strong>Vehículos: </strong><span *ngIf="vehicles.length <= 0">No hay vehículos para asignar.</span></label><br>
+    <table class="table content-table historic-table" *ngIf="vehicles.length > 0">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col">Vin</th>
+        <th scope="col" style="text-align: center">Seleccionar</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of vehicles">
+        <td>{{vehicle.Vin}}</td>
+        <td style="text-align: center"><label class="form-check-label"><input type="checkbox" class="form-check-input chk-table" [(ngModel)]="vehicle.Selected" (change)="vehicleSelected(vehicle)"></label></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="submit" class="btn btn-info" (click)="assign()" [ngClass]="{'disabled' : !isValidData()}" [disabled]="!isValidData()">Asignar</button><br>
+</div>
+
+<div *ngIf="error">
+  <br><div class="alert alert-danger form-content">
+  <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+</div>
+</div>
+
+<app-loading-modal #loadingModal></app-loading-modal>

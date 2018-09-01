@@ -1,0 +1,8 @@
+<div>
+    <label><strong>Vehículo: </strong>{{vehicle.Vin}}</label><br>
+    <div class="form-group">
+      <label>* Precio (USD)</label>
+      <input type="number" min="1" class="form-control form-content" placeholder="Ingrese un precio" [(ngModel)]="price" >
+    </div>
+  <button type="submit" class="btn btn-info" (click)="sell()" [ngClass]="{'disabled' : !isValidData()}" [disabled]="!isValidData()">Vender</button><br>
+</div>

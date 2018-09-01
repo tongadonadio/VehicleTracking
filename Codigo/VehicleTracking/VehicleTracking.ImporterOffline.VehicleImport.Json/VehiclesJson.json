@@ -1,0 +1,12 @@
+[
+	{
+		"Brand" : "Chevrolet",
+		"Model" : "Onix",
+		"Year" : 2016,
+		"Color" : "Rojo",
+		"Type" : "Auto",
+		"Vin" : "SSD 1234",
+		"CurrentLocation" : "Patio",
+		"Status" : "En patio"
+	}
+]

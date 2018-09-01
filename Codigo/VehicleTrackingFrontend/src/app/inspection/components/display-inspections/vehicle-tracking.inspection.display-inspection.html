@@ -1,0 +1,57 @@
+<div *ngIf="!load">
+  <div class="content-btn form-content" *ngIf="!globalError">
+    <input type="text" class="form-control search" placeholder="Buscar por Id..." [(ngModel)]="search" >
+  </div>
+
+  <div *ngIf="globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+  </div>
+  </div>
+
+  <div class="form-group form-content" *ngIf="(!inspections || inspections.length <= 0) && !globalError">
+    <br><span>No hay ninguna inspección creada en el sistema.</span>
+  </div>
+
+  <div *ngIf="!!inspections && inspections.length > 0 && (inspections | searchInspection:search).length <= 0">
+    <br><div class="alert alert-warning form-content">
+    <strong>Atención!</strong> No hay inspecciones disponibles para visualizar para esta busqueda.
+    </div>
+  </div>
+
+  <div *ngIf="!!inspections && inspections.length > 0 && (inspections | searchInspection:search).length > 0">
+    <div class="card chart form-content" *ngFor="let inspection of (inspections | searchInspection:search)">
+      <div class="card-header">
+        <h6>Inspección</h6>
+      </div>
+       <div class="card-body">
+         <span class="card-text"><strong>Id: </strong>{{inspection.Id}}</span><br>
+         <span class="card-text"><strong>Fecha: </strong>{{inspection.Date | date:'dd/MM/y, h:mm'}}</span><br>
+         <span class="card-text"><strong>Ubicación: </strong>{{inspection.Location}}</span><br>
+         <span class="card-text"><strong>Creador: </strong>{{inspection.CreatorUserName}}</span><br>
+         <span class="card-text"><strong>Vehículo: </strong>{{inspection.IdVehicle}}</span>
+      </div>
+      <ul class="list-group list-group-flush" *ngIf="!!inspection.Damages">
+        <li class="list-group-item">
+          <div style="margin-bottom: 10px">
+            <h6>Daños</h6>
+          </div>
+          <div *ngIf="inspection.Damages.length <=0">
+            <span>Sin daños</span>
+          </div>
+          <div *ngFor="let damage of inspection.Damages">
+            <div style="overflow: hidden">
+              <span class="card-text"><strong>Descripción: </strong>{{damage.Description}}</span><br>
+              <span class="card-text"><strong>Imagenes: </strong></span><br>
+              <div *ngFor="let image of damage.Images" class="inspection-image-container">
+                <img [src]="image.Base64EncodedImage" class="inspection-image">
+              </div>
+            </div>
+            <hr *ngIf="inspection.Damages.indexOf(damage) != inspection.Damages.length - 1">
+          </div>
+        </li>
+      </ul>
+    </div><br>
+  </div>
+</div>
+<app-loading #loading></app-loading>

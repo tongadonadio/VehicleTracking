@@ -1,0 +1,59 @@
+<div *ngIf="!load">
+
+  <div *ngIf="stopTransportError && !globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> No se pudo transportar el lote, por favor contáctese con un administrador.
+  </div>
+  </div>
+
+  <div class="content-btn form-content action-content" *ngIf="!globalError">
+    <input type="text" class="form-control search" placeholder="Buscar por Id..." [(ngModel)]="search" >
+    <button type="button" class="btn btn-info action-btn" [ngClass]="{'disabled' : !isFinishTransportReady()}" [disabled]="!isFinishTransportReady()" (click)="finishTransport()">Finalizar transporte</button>
+  </div>
+
+  <div *ngIf="globalError">
+    <br><div class="alert alert-danger form-content">
+    <strong>Error!</strong> ha ocurrido un error en el servidor, por favor contactese con un administrador.
+    </div>
+  </div>
+
+  <div class="form-group form-content" *ngIf="(!transports || transports.length <= 0) && !globalError">
+    <br><span>No hay ningun lote creado en el sistema.</span>
+  </div>
+
+  <div *ngIf="!!transports && transports.length > 0 && (transports | searchTransport:search).length <= 0">
+    <br><div class="alert alert-warning form-content">
+    <strong>Atención!</strong> No hay lotes disponibles para visualizar para esta busqueda.
+  </div>
+  </div>
+
+  <table class="table content-table" *ngIf="!!transports && transports.length > 0 && (transports | searchTransport:search).length > 0">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Fecha de inicio</th>
+      <th scope="col">Fecha de fin</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Responsable</th>
+      <th scope="col">Lotes</th>
+      <th scope="col">Seleccionar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let transport of (transports | searchTransport:search)">
+      <td>{{transport.Id}}</td>
+      <td>{{transport.StartDate | date:'dd/MM/y, h:mm'}}</td>
+      <td>
+        <span *ngIf="transport.TransportStatus === 'En transporte'"> - </span>
+        <span *ngIf="transport.TransportStatus === 'Transportado'">{{transport.EndDate | date:'dd/MM/y, h:mm'}}</span>
+      </td>
+      <td>{{transport.TransportStatus}}</td>
+      <td>{{transport.User.UserName}}</td>
+      <td><span *ngFor="let b of transport.Batches">{{b.Id}}<br></span></td>
+      <td style="text-align: center"><label class="form-check-label" *ngIf="transport.TransportStatus === 'En transporte'"><input type="checkbox" class="form-check-input chk-table" [(ngModel)]="transport.Selected" (change)="transportSelected(transport)"></label></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<app-loading-modal #loadingModal></app-loading-modal>
+<app-loading #loading></app-loading>
