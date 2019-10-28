@@ -65,7 +65,7 @@ artifacts/
 *.tlh
 *.tmp
 *.tmp_proj
-*.log
+
 *.vspscc
 *.vssscc
 .builds
@@ -239,7 +239,7 @@ node_modules/
 # Typescript v1 declaration files
 typings/
 
-# Visual Studio 6 build log
+# Visual Studio 6 build https://github.com/tongadonadio/VehicleTracking.git
 *.plg
 
 # Visual Studio 6 workspace options file
